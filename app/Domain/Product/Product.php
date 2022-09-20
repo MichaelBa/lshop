@@ -7,6 +7,7 @@ use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -51,5 +52,10 @@ class Product extends Model
     public function hasAvailableInventory(int $requestedAmount): bool
     {
         return $this->inventory->amount >= $requestedAmount;
+    }
+
+    public function filters(): HasMany
+    {
+        return $this->hasMany(ProductFilter::class);
     }
 }
